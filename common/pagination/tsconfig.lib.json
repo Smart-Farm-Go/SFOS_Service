@@ -2,7 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "declaration": true,
-    "outDir": "../../dist/libs/pagination"
+    "outDir": "../../dist/common/pagination"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]

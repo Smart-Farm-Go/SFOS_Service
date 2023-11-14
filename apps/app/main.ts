@@ -33,6 +33,6 @@ async function bootstrap() {
 /* 运行 */
 bootstrap().then(({ port, version }) => {
   const logger = new LoggerService();
-  logger.log(`服务已启动 http://localhost:${port}`, 'Bootstrap');
-  logger.log(`服务已启动 http://localhost:${port}/${version}`, 'Bootstrap');
+  logger.log(`service listen: http://localhost:${port}`, 'Bootstrap');
+  logger.log(`service listen: http://localhost:${port}/${version}`, 'Bootstrap');
 });

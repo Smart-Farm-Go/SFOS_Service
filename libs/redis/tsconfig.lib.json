@@ -2,7 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "declaration": true,
-    "outDir": "../../dist/libs/swagger"
+    "outDir": "../dist/libs/redis"
   },
   "include": ["**/*"],
   "exclude": ["node_modules", "dist"]

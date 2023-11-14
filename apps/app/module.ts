@@ -2,11 +2,16 @@ import { AppConfig, AppName, AppOptions, ConfigGlobal, MiddlewareConfig } from '
 import { Module, ValidationPipeOptions } from '@nestjs/common';
 import { LoggerModule } from '@app/libs/logger';
 import { ConfigService } from '@nestjs/config';
+import { RedisModule } from '@app/libs/redis';
+
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
     ConfigGlobal.use(AppConfig, MiddlewareConfig),
     LoggerModule,
+    RedisModule.forRoot({}, true),
+    UsersModule,
   ],
 })
 export class AppModule {

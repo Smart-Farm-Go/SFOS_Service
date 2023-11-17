@@ -1,0 +1,9 @@
+{
+  "name": "Smart Farm Cli",
+  "version": "0.0.1",
+  "description": "commands 工具将为 Smart Farm OS 提供命令行工具。用于程序配置，用户控制，程序监控等，辅助命令行工具。",
+  "scripts": {
+    "build": "tsc ./src/index.ts -outdir ./dist",
+    "build:watch": "tsc ./src/index.ts -w -outdir ./dist"
+  }
+}

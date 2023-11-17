@@ -7,7 +7,7 @@ export class RedisService implements OnApplicationShutdown {
   private logger = new Logger(RedisService.name);
   private redisPackage = new Map<string, IoRedis.Redis>();
 
-  constructor(@Inject(RedisOptions) private readonly opt: string | RedisModuleOptions | Array<RedisModuleOptions>) {
+  constructor(@Inject(RedisOptions) opt: string | RedisModuleOptions | Array<RedisModuleOptions>) {
     let opts = [];
     if (typeof opt === 'string') {
       opts = [{ name: 'default', url: opt }];
@@ -42,12 +42,12 @@ export class RedisService implements OnApplicationShutdown {
   }
 
   private handleOption(opt: RedisModuleOptions) {
-    const { name, url, retryAttempts, host, port, ...options } = opt;
+    const { name, url, retryTimes, maxRetry: maxRetriesPerRequest, host, port, ...options } = opt;
     if (url) return url;
     const retryStrategy = (times: number) => {
-      return this.createRetryStrategy(times, retryAttempts);
+      return this.createRetryStrategy(times, retryTimes);
     };
-    return { port: 6379, host: '127.0.0.1', ...options, retryStrategy, lazyConnect: true };
+    return { port: 6379, host: '127.0.0.1', ...options, retryStrategy, lazyConnect: true, maxRetriesPerRequest };
   }
 
   /* 重试 */

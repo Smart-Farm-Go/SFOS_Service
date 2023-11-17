@@ -5,13 +5,15 @@ import { ConfigService } from '@nestjs/config';
 import { RedisModule } from '@app/libs/redis';
 
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     ConfigGlobal.use(AppConfig, MiddlewareConfig),
     LoggerModule,
-    RedisModule.forRoot({}, true),
+    RedisModule.forRoot({ retryTimes: 1000 }, true),
     UsersModule,
+    AuthModule,
   ],
 })
 export class AppModule {

@@ -10,5 +10,6 @@ export interface RedisModuleOptions {
   port?: number;
   username?: string;
   password?: string;
-  retryAttempts?: number;
+  maxRetry?: number;
+  retryTimes?: number;
 }

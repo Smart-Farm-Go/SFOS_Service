@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { LoginDto, RegisterDto } from './dto/auth.dto';
-import { NoJwtToken } from '@app/libs/jwtToken';
+import { NoJwtToken } from '@libs/jwtToken';
 import { AuthService } from './auth.service';
 
 @NoJwtToken()

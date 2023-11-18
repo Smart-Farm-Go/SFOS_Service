@@ -1,4 +1,4 @@
-import { JwtAuthGuardName, JwtTokenFromRequest, NoJwtTokenName } from '@app/libs/jwtToken/src/config';
+import { JwtAuthGuardName, JwtTokenFromRequest, NoJwtTokenName } from './config';
 import { ExecutionContext, Injectable } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { JwtService } from '@nestjs/jwt';

@@ -1,6 +1,6 @@
 import { RedisOptions, RedisModuleOptions } from './interface';
 import { RedisService } from './redis.service';
-import { Module, Global } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 
 @Module({
   providers: [RedisService],

@@ -1,8 +1,8 @@
 import { JwtModuleAsyncOptions, JwtModuleOptions } from '@nestjs/jwt/dist/interfaces/jwt-module-options.interface';
-import { JwtTokenStrategy } from '@app/libs/jwtToken/src/jwtToken.strategy';
-import { JwtTokenGuard } from '@app/libs/jwtToken/src/jwtToken.guard';
-import { JwtTokenOptions } from '@app/libs/jwtToken/src/config';
+import { JwtTokenStrategy } from './jwtToken.strategy';
 import { JwtModule, JwtService } from '@nestjs/jwt';
+import { JwtTokenGuard } from './jwtToken.guard';
+import { JwtTokenOptions } from './config';
 import { APP_GUARD } from '@nestjs/core';
 import { Module } from '@nestjs/common';
 

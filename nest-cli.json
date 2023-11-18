@@ -19,6 +19,15 @@
         "tsConfigPath": "apps/app/tsconfig.app.json"
       }
     },
+    "cli": {
+      "type": "application",
+      "root": "apps/cli",
+      "entryFile": "main",
+      "sourceRoot": "apps/cli",
+      "compilerOptions": {
+        "tsConfigPath": "apps/cli/tsconfig.app.json"
+      }
+    },
     "middleware": {
       "type": "library",
       "root": "apps/middleware",
@@ -62,6 +71,15 @@
       "sourceRoot": "apps/common",
       "compilerOptions": {
         "tsConfigPath": "apps/common/tsconfig.lib.json"
+      }
+    },
+    "mysql": {
+      "type": "library",
+      "root": "apps/mysql",
+      "entryFile": "main",
+      "sourceRoot": "apps/mysql",
+      "compilerOptions": {
+        "tsConfigPath": "apps/mysql/tsconfig.lib.json"
       }
     }
   }

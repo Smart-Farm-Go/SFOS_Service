@@ -1,4 +1,4 @@
-import { JwtAuthGuardName, JwtTokenFromRequest, JwtTokenOptions } from '@app/libs/jwtToken/src/config';
+import { JwtAuthGuardName, JwtTokenFromRequest, JwtTokenOptions } from './config';
 import { PassportStrategy } from '@nestjs/passport';
 import { Inject, Injectable } from '@nestjs/common';
 import { Strategy } from 'passport-jwt';

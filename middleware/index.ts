@@ -2,7 +2,7 @@ import { INestApplication } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
 import { useTraceIdMiddleware } from './src/TraceId.middleware';
-import { MiddlewareOptions, MiddlewareName } from '@app/config';
+import { MiddlewareOptions, MiddlewareName } from '@config';
 
 /* 中间件 */
 export const useMiddleware = (app: INestApplication) => {

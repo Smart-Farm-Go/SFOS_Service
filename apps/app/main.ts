@@ -1,8 +1,8 @@
-import { useInterceptor } from '@app/interceptor';
-import { LoggerService } from '@app/libs/logger';
-import { useMiddleware } from '@app/middleware';
 import { ValidationPipe } from '@nestjs/common';
-import { useSwagger } from '@app/libs/swagger';
+import { useInterceptor } from '@interceptor';
+import { LoggerService } from '@libs/logger';
+import { useMiddleware } from '@middleware';
+import { useSwagger } from '@libs/swagger';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './module';
 

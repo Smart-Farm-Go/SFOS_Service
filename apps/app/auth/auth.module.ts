@@ -1,4 +1,4 @@
-import { JwtTokenModule } from '@app/libs/jwtToken';
+import { JwtTokenModule } from '@libs/jwtToken';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { Module } from '@nestjs/common';

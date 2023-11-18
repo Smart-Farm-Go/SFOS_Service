@@ -2,7 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "declaration": true,
-    "outDir": "../../dist/common/pagination"
+    "outDir": "../../dist/common/crypto"
   },
   "include": ["**/*"],
   "exclude": ["node_modules", "dist"]

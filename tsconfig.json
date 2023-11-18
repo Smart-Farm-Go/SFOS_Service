@@ -18,11 +18,14 @@
     "noFallthroughCasesInSwitch": false,
     "forceConsistentCasingInFileNames": false,
     "paths": {
-      "@app/config": ["config"],
-      "@app/libs/*": ["libs/*"],
-      "@app/common/*": ["common/*"],
-      "@app/middleware": ["middleware"],
-      "@app/interceptor": ["interceptor"],
+      "@cli/*": ["apps/cli/*"],
+      "@app/*": ["apps/app/*"],
+      "@config": ["config"],
+      "@libs/*": ["libs/*"],
+      "@mysql/*": ["mysql/*"],
+      "@common/*": ["common/*"],
+      "@middleware": ["middleware"],
+      "@interceptor": ["interceptor"],
     }
   }
 }

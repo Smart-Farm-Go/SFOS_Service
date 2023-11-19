@@ -1,5 +1,3 @@
-import * as uuid from 'uuid';
-
 export function handlerNumber(value: string) {
   return isNaN(Number(value)) ? undefined : Number(value);
 }
@@ -12,6 +10,6 @@ export const EmailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3
 
 export const isEmail = (value: string) => EmailReg.test(value);
 
-export function getNumUID() {
-  return parseInt(uuid.v4().replace(/-/g, ''), 16);
+export function getNumUID(digits = 8) {
+  return Math.floor(Math.random() * Math.pow(10, digits - 1));
 }

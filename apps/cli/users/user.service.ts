@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 import { Users } from '@mysql/users';
 
 @Injectable()
-@Command({ name: 'user' })
+@Command({ name: 'user', description: '用户管理' })
 export class UserService {
   constructor(@InjectRepository(Users) private userRep: Repository<Users>) {}
 
@@ -19,12 +19,14 @@ export class UserService {
     if (!pass) return console.log('pass is required');
     if (!isEmail(user)) return console.log('user is not email');
 
+    const uid = getNumUID(10);
     const users = new Users();
-    users.uid = getNumUID();
     users.email = user;
     users.pass = pass;
     users.name = user;
+    users.uid = uid;
 
-    return await this.userRep.save(users);
+    await this.userRep.save(users);
+    return console.log('create user success');
   }
 }

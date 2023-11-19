@@ -9,10 +9,11 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, { logger: false });
   try {
     /* 模块 -> 方法 -> 执行 */
-    app.select(AppModule).get(AppService).run();
+    await app.select(AppModule).get(AppService).run();
     /* 关闭 */
     await app.close();
   } catch (e) {
+    console.error(e);
     await app.close();
     process.exit(1);
   }

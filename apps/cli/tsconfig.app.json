@@ -2,7 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "declaration": false,
-    "outDir": "../../dist/apps/cli"
+    "outDir": "../../commands",
   },
   "include": ["**/*"],
   "exclude": ["node_modules", "dist"]

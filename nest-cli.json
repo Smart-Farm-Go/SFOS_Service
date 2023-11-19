@@ -22,7 +22,7 @@
     "cli": {
       "type": "application",
       "root": "apps/cli",
-      "entryFile": "main",
+      "entryFile": "index",
       "sourceRoot": "apps/cli",
       "compilerOptions": {
         "tsConfigPath": "apps/cli/tsconfig.app.json"

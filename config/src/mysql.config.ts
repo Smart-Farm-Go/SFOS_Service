@@ -12,8 +12,8 @@ export const MysqlConfig = registerAs(MysqlConfigName, (): MysqlConfigOptions =>
   return {
     port: 3306,
     type: 'mysql',
-    charset: 'utf8',
     host: '127.0.0.1',
+    charset: 'UTF8_GENERAL_CI',
     database: process.env['MYSQL_DB'],
     username: process.env['MYSQL_USER'],
     password: process.env['MYSQL_PASS'],

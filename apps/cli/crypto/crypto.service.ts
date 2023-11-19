@@ -3,7 +3,7 @@ import { generateKeyPairSync } from 'crypto';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-@Command({ name: 'crypto' })
+@Command({ name: 'crypto', description: '加密' })
 export class CryptoService {
 
   @CommandOptions([{ flags: 'rsa', values: '<long>', description: '密钥长度', handler: handlerNumber }])

@@ -42,32 +42,30 @@ export class AppService {
 
   addCommand(instance: any, meta: CommandOption) {
     const proto = Object.getPrototypeOf(instance);
-    const methodNames = Object.getOwnPropertyNames(proto).filter(v => v !== 'constructor');
-    const options = methodNames.reduce((prev, command) => {
-      let valOption = Reflect.getMetadata(CommandOptionsName, proto[command]) || [];
-      if (!valOption.length) return prev;
-      if (valOption.length === 1) valOption[0].isCommand = true;
-      //
-      for (const item of valOption) {
-        if (item.isCommand) item.command = proto[command];
-      }
-      return prev.concat(valOption);
-    }, []);
-    //
+    const commandMap: { [name: string]: () => Promise<void> } = {};
     const newCommand = this.createCommand(meta.name, meta.version, meta.description);
-    const commandMap: { [name: string]: CommandOptions['command'] } = options.reduce(function (prev, curr) {
-      if (curr.command) return Object.assign(prev, { [curr.flags]: curr.command });
-      return prev;
-    }, {});
-    for (const opt of options) {
-      const flags = opt.alias && opt.flags ? `-${opt.alias}, --${opt.flags}` : `-${opt.alias || opt.flags}`;
-      newCommand.option([flags, opt.values].join(' '), opt.description, opt.handler || undefined, opt.default || undefined);
+    const methodNames = Object.getOwnPropertyNames(proto).filter(v => v !== 'constructor');
+
+    /* 方法遍历 */
+    for (const command of methodNames) {
+      const options = Reflect.getMetadata(CommandOptionsName, proto[command]) as CommandOptions[] || [];
+      if (options.length === 1) options[0].isCommand = true;
+      if (!options.length) continue;
+
+      /* 参数遍历 */
+      for (const opt of options) {
+        const flags = opt.alias && opt.flags ? `-${opt.alias}, --${opt.flags}` : `-${opt.alias || opt.flags}`;
+        newCommand.option([flags, opt.values].join(' '), opt.description, opt.handler || undefined, opt.default || undefined);
+        if (opt.isCommand) commandMap[(opt.flags).toLowerCase()] = instance[command];
+      }
     }
+
     newCommand.action(async function (items) {
       const keys = Object.keys(items).map(v => v.toLowerCase());
       for (const key of keys) {
         if (commandMap.hasOwnProperty(key)) {
-          await commandMap[key](items);
+          /* 生命周期 */
+          await commandMap[key].apply(instance, [items]);
         }
       }
       process.exit(0);

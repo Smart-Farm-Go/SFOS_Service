@@ -1,8 +1,11 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { LoginDto, RegisterDto } from './dto/auth.dto';
-import { NoJwtToken } from '@libs/jwtToken';
+import { ManualHttpException } from '@common/error';
 import { AuthService } from './auth.service';
+import { NoJwtToken } from '@libs/jwtToken';
+import { Users } from '@mysql/users';
+import { createPass } from '@common/crypto';
 
 @NoJwtToken()
 @ApiTags('Auth 登录/注册')
@@ -13,8 +16,12 @@ export class AuthController {
   @Post('login')
   @ApiOperation({ summary: '登录' })
   async login(@Body() body: LoginDto) {
-    return 'login';
-    // return await this.authService.login(body);
+    const verifyPass = createPass(body.user, body.pass);
+    const userInfo = await Users.getInfoKeys({ email: body.user, pass: verifyPass });
+    if (!userInfo) return ManualHttpException('账号或密码错误');
+    const status = this.authService.verifyUserState(userInfo.status);
+    if (status) return ManualHttpException(status);
+    return await this.authService.login(userInfo, body.tags || 'web');
   }
 
   @Post('register')

@@ -10,6 +10,9 @@ import { Users } from '@mysql/users';
 
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { JwtTokenGuard, JwtTokenStrategy } from '@libs/jwtToken';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -31,6 +34,11 @@ import { AuthModule } from './auth/auth.module';
     //
     UsersModule,
     AuthModule,
+  ],
+  providers: [
+    JwtService,
+    JwtTokenStrategy,
+    { provide: APP_GUARD, useClass: JwtTokenGuard },
   ],
 })
 export class AppModule {

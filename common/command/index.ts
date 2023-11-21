@@ -43,4 +43,4 @@ export function CommandOptions(options: CommandOptions[]) {
   };
 }
 
-export * from './utils';
+export * from './utils/handler';

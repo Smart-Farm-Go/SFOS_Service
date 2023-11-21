@@ -25,10 +25,10 @@ export class tokenService {
   }
 
   /* 创建令牌 */
-  createToken(userInfo: any, tags = 'web'): TokenOptions {
+  createToken(payload: any, tags = 'web'): TokenOptions {
     const { state, expires, end } = this.getTime();
-    const accessToken = this.jwtService.sign({ ...userInfo, tags, state, expires }, { expiresIn: '12h' });
-    const refreshToken = this.jwtService.sign({ ...userInfo, tags, state, expires, end }, { expiresIn: '1d' });
+    const accessToken = this.jwtService.sign({ ...payload, tags, state, expires }, { secret: 'secret', expiresIn: '12h' });
+    const refreshToken = this.jwtService.sign({ ...payload, tags, state, expires, end }, { secret: 'secret', expiresIn: '1d' });
     return { accessToken, refreshToken, accessExpires: expires, refreshExpires: end };
   }
 

@@ -30,56 +30,65 @@
     },
     "middleware": {
       "type": "library",
-      "root": "apps/middleware",
+      "root": "middleware",
       "entryFile": "main",
-      "sourceRoot": "apps/middleware",
+      "sourceRoot": "middleware",
       "compilerOptions": {
-        "tsConfigPath": "apps/middleware/tsconfig.lib.json"
+        "tsConfigPath": "middleware/tsconfig.lib.json"
       }
     },
     "interfaces": {
       "type": "library",
-      "root": "apps/interfaces",
+      "root": "interfaces",
       "entryFile": "main",
-      "sourceRoot": "apps/interfaces",
+      "sourceRoot": "interfaces",
       "compilerOptions": {
-        "tsConfigPath": "apps/interfaces/tsconfig.lib.json"
+        "tsConfigPath": "interfaces/tsconfig.lib.json"
       }
     },
     "config": {
       "type": "library",
-      "root": "apps/config",
+      "root": "config",
       "entryFile": "main",
-      "sourceRoot": "apps/config",
+      "sourceRoot": "config",
       "compilerOptions": {
-        "tsConfigPath": "apps/config/tsconfig.lib.json"
+        "tsConfigPath": "config/tsconfig.lib.json"
       }
     },
     "libs": {
       "type": "library",
-      "root": "apps/libs",
+      "root": "libs",
       "entryFile": "main",
-      "sourceRoot": "apps/libs",
+      "sourceRoot": "libs",
       "compilerOptions": {
-        "tsConfigPath": "apps/libs/tsconfig.lib.json"
+        "tsConfigPath": "libs/tsconfig.lib.json"
       }
     },
     "common": {
       "type": "library",
-      "root": "apps/common",
+      "root": "common",
       "entryFile": "main",
-      "sourceRoot": "apps/common",
+      "sourceRoot": "common",
       "compilerOptions": {
-        "tsConfigPath": "apps/common/tsconfig.lib.json"
+        "tsConfigPath": "common/tsconfig.lib.json"
       }
     },
     "mysql": {
       "type": "library",
-      "root": "apps/mysql",
+      "root": "mysql",
       "entryFile": "main",
-      "sourceRoot": "apps/mysql",
+      "sourceRoot": "mysql",
       "compilerOptions": {
-        "tsConfigPath": "apps/mysql/tsconfig.lib.json"
+        "tsConfigPath": "mysql/tsconfig.lib.json"
+      }
+    },
+    "utils": {
+      "type": "library",
+      "root": "utils",
+      "entryFile": "main",
+      "sourceRoot": "apps/utils",
+      "compilerOptions": {
+        "tsConfigPath": "utils/tsconfig.lib.json"
       }
     }
   }

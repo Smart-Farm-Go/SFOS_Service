@@ -1,8 +1,10 @@
 import { Controller, Get } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { RedisService } from '@libs/redis';
+import { ApiBasicAuth, ApiSecurity } from '@nestjs/swagger';
 
 @Controller('users')
+@ApiSecurity('basic')
 export class UsersController {
   constructor(
     private readonly usersService: UsersService,
@@ -10,6 +12,7 @@ export class UsersController {
   ) {}
 
   @Get()
+  @ApiBasicAuth('basic')
   async findAll() {
     const redis = this.redisService.connect();
     if (redis) {

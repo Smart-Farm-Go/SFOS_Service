@@ -1,6 +1,9 @@
-import { Command, CommandOptions, getNumUID, isEmail } from '@common/command';
+import { Command, CommandOptions } from '@common/command';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
+import { createPass } from '@common/crypto';
+import { getPlacesUID } from '@utils/uuid';
+import { emailReg } from '@utils/reg';
 import { Repository } from 'typeorm';
 import { Users } from '@mysql/users';
 
@@ -17,14 +20,13 @@ export class UserService {
   async create({ user, pass }: { user: string, pass: string }) {
     if (!user) return console.log('user is required');
     if (!pass) return console.log('pass is required');
-    if (!isEmail(user)) return console.log('user is not email');
+    if (!emailReg.test(user)) return console.log('user is not email');
 
-    const uid = getNumUID(10);
     const users = new Users();
-    users.email = user;
-    users.pass = pass;
     users.name = user;
-    users.uid = uid;
+    users.email = user;
+    users.uid = getPlacesUID(10);
+    users.pass = createPass(user, pass);
 
     await this.userRep.save(users);
     return console.log('create user success');

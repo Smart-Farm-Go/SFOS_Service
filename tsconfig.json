@@ -20,9 +20,11 @@
     "paths": {
       "@cli/*": ["apps/cli/*"],
       "@app/*": ["apps/app/*"],
+      "@utils": ["utils"],
       "@config": ["config"],
       "@libs/*": ["libs/*"],
       "@mysql/*": ["mysql/*"],
+      "@utils/*": ["utils/*"],
       "@common/*": ["common/*"],
       "@middleware": ["middleware"],
       "@interceptor": ["interceptor"],

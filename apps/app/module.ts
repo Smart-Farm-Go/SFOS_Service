@@ -1,7 +1,8 @@
-import { AppConfig, MiddlewareConfig, MysqlConfig } from '@config';
+import { AppConfig, JwtTokenConfig, JwtTokenName, MiddlewareConfig, MysqlConfig } from '@config';
 import { Module, ValidationPipeOptions } from '@nestjs/common';
 import { MysqlConfigName, MysqlConfigOptions } from '@config';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { JwtTokenModule, JwtTokenOptions } from '@common/jwtToken';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppName, AppOptions } from '@config';
 import { LoggerModule } from '@libs/logger';
@@ -10,16 +11,19 @@ import { Users } from '@mysql/users';
 
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
-import { JwtTokenGuard, JwtTokenStrategy } from '@libs/jwtToken';
-import { APP_GUARD } from '@nestjs/core';
-import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
     LoggerModule,
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [AppConfig, MysqlConfig, MiddlewareConfig],
+      load: [AppConfig, JwtTokenConfig, MysqlConfig, MiddlewareConfig],
+    }),
+    JwtTokenModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => {
+        return configService.get<JwtTokenOptions>(JwtTokenName);
+      },
     }),
     RedisModule.forRoot({ retryTimes: 1000 }, true),
     TypeOrmModule.forRootAsync({
@@ -34,11 +38,6 @@ import { JwtService } from '@nestjs/jwt';
     //
     UsersModule,
     AuthModule,
-  ],
-  providers: [
-    JwtService,
-    JwtTokenStrategy,
-    { provide: APP_GUARD, useClass: JwtTokenGuard },
   ],
 })
 export class AppModule {

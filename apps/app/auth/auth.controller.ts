@@ -2,10 +2,10 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { LoginDto, RegisterDto } from './dto/auth.dto';
 import { ManualHttpException } from '@common/error';
+import { NoJwtToken } from '@common/jwtToken';
 import { AuthService } from './auth.service';
-import { NoJwtToken } from '@libs/jwtToken';
-import { Users } from '@mysql/users';
 import { createPass } from '@common/crypto';
+import { Users } from '@mysql/users';
 
 @NoJwtToken()
 @ApiTags('Auth 登录/注册')

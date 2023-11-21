@@ -3,6 +3,7 @@ import { ExecutionContext, Injectable } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { JwtService } from '@nestjs/jwt';
 import { Reflector } from '@nestjs/core';
+import { ManualHttpException } from '@common/error';
 
 /* jwt 网关 */
 @Injectable()
@@ -41,5 +42,10 @@ export class JwtTokenGuard extends AuthGuard(JwtAuthGuardName) {
 
   isPublic(context: ExecutionContext) {
     return this.reflector.getAllAndOverride<boolean>(NoJwtTokenName, [context.getHandler(), context.getClass()]);
+  }
+
+  handleRequest(err: any, user: any, info: any) {
+    if (err || !user) return ManualHttpException('未经许可的，无权限。');
+    return user;
   }
 }

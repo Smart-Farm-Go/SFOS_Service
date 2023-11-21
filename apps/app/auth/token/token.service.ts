@@ -17,18 +17,18 @@ export class tokenService {
 
   private getTime() {
     const time = new Date();
-    const state = time.getTime();
+    const state = ~~(time.getTime() / 1000);
     time.setHours(time.getHours() + 12);
-    const expires = time.getTime();
+    const expires = ~~(time.getTime() / 1000);
     time.setHours(time.getHours() + 12);
-    return { state, expires, end: time.getTime() };
+    return { state, expires, end: ~~(time.getTime() / 1000) };
   }
 
   /* 创建令牌 */
   createToken(payload: any, tags = 'web'): TokenOptions {
     const { state, expires, end } = this.getTime();
-    const accessToken = this.jwtService.sign({ ...payload, tags, state, expires }, { secret: 'secret', expiresIn: '12h' });
-    const refreshToken = this.jwtService.sign({ ...payload, tags, state, expires, end }, { secret: 'secret', expiresIn: '1d' });
+    const accessToken = this.jwtService.sign({ ...payload, tags, state, expires }, { expiresIn: '12h' });
+    const refreshToken = this.jwtService.sign({ ...payload, tags, state, expires, end }, { expiresIn: '1d' });
     return { accessToken, refreshToken, accessExpires: expires, refreshExpires: end };
   }
 

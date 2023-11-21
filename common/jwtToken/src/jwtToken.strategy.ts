@@ -5,9 +5,8 @@ import { Strategy } from 'passport-jwt';
 
 @Injectable()
 export class JwtTokenStrategy extends PassportStrategy(Strategy, JwtAuthGuardName) {
-  constructor() {
-  // @Inject(JwtTokenOptions) opt: any
-    super({ secretOrKey: "opt.secret", ignoreExpiration: false, jwtFromRequest: JwtTokenFromRequest });
+  constructor(@Inject(JwtTokenOptions) opt: any) {
+    super({ ...opt, jwtFromRequest: JwtTokenFromRequest });
   }
 
   async validate(payload: any) {

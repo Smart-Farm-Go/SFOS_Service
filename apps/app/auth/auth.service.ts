@@ -30,6 +30,7 @@ export class AuthService {
   async login(userInfo: Users, tags: string) {
     const payload = reWriteObj(userInfo, ['uid', 'name', 'email', 'phone', 'avatar', 'signature']);
     const token = this.tokenService.createToken(payload, tags);
-    return token;
+    await this.tokenService.setToken(userInfo.uid, tags, token);
+    return Object.assign({}, payload, token);
   }
 }

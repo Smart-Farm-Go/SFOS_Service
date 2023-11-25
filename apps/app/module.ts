@@ -1,14 +1,18 @@
 import { AppConfig, JwtTokenConfig, JwtTokenName, MiddlewareConfig, MysqlConfig } from '@config';
+import { JwtTokenModule, JwtTokenOptions } from '@common/jwtToken';
 import { Module, ValidationPipeOptions } from '@nestjs/common';
 import { MysqlConfigName, MysqlConfigOptions } from '@config';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { JwtTokenModule, JwtTokenOptions } from '@common/jwtToken';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppName, AppOptions } from '@config';
 import { LoggerModule } from '@libs/logger';
 import { RedisModule } from '@libs/redis';
-import { Users } from '@mysql/users';
 
+// Mysql
+import { Users, UsersConfig } from '@mysql/users';
+import { Settings } from '@mysql/settings';
+
+// Module
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 
@@ -31,7 +35,7 @@ import { AuthModule } from './auth/auth.module';
       useFactory: (configService: ConfigService) => {
         const config = configService.get<MysqlConfigOptions>(MysqlConfigName);
         return Object.assign({ ...config }, {
-          entities: [Users],
+          entities: [Users, UsersConfig, Settings],
         });
       },
     }),

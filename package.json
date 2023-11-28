@@ -1,5 +1,5 @@
 {
-  "name": "smart-farm-os",
+  "name": "sfos_service",
   "version": "0.0.1",
   "scripts": {
     "build": "nest build",

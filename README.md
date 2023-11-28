@@ -1,7 +1,6 @@
-## Smart Farm OS
+## 服务端(SFOS_Service)
 
-这是一个智能农业操作系统，可用于监测和控制农业过程。
-是为那些想要监控作物和作物生长的农民设计的。
+SFOS_Service 是 SFOS 的 API 服务端，并不提供 UI 交互。
 
 ### commands 工具
 
